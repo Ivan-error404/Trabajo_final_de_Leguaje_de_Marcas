@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cine Lumière Valencia</title>
+  <meta name="description" content="Cine Lumière en Valencia: cartelera, estrenos, preventa y reservas de entradas.">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="logo">Cine Lumière</div>
+  <nav class="main-nav">
+    <a href="#inicio">Inicio</a>
+    <a href="#cartelera">Cartelera</a>
+    <a href="#preventa">Preventa</a>
+    <a href="#salas">Salas</a>
+    <a href="#reservas">Reservar</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+</header>
+
+<!-- MAIN -->
+<main>
+
+  <!-- INICIO -->
+  <section id="inicio" class="hero">
+    <div class="hero-bg">
+      <img src="img/fine lumiere fondo principal.jpg" alt="Cine Lumière Valencia" />
+    </div>
+    <div class="hero-content">
+      <h1>Tu cine de confianza en Valencia</h1>
+      <p>Estrenos, clásicos y sesiones especiales. 8 salas con los mejores formatos: IMAX, 4DX y Dolby Atmos.</p>
+      <div class="hero-buttons">
+        <a href="#cartelera" class="btn primary">Ver cartelera</a>
+        <a href="#reservas" class="btn secondary">Reservar entradas</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARTELERA -->
+  <section id="cartelera" class="section section-alt">
+    <div class="section-inner">
+      <h2>Cartelera</h2>
+      <p class="section-subtitle">Las mejores películas de hoy. Selecciona un horario para reservar.</p>
+
+      <div class="genre-filters" id="genre-filters">
+        <!-- JS genera los filtros -->
+      </div>
+
+      <div id="movies-grid" class="movies-grid">
+        <!-- JS genera las películas -->
+      </div>
+    </div>
+  </section>
+
+  <!-- PREVENTA DIGITAL CIRCUS -->
+  <section id="preventa" class="preventa-section">
+    <div class="preventa-inner">
+      <div class="preventa-left">
+        <span class="preventa-badge">🎪 Preventa Exclusiva</span>
+        <h2 class="preventa-title">The Amazing Digital Circus: La película</h2>
+        <p class="preventa-subtitle">La esperada adaptación de la serie de animación más vista de internet llega al cine.</p>
+
+        <div class="countdown" id="countdown">
+          <div class="countdown-item">
+            <span class="countdown-number" id="countdown-days">00</span>
+            <span class="countdown-label">Días</span>
+          </div>
+          <div class="countdown-item">
+            <span class="countdown-number" id="countdown-hours">00</span>
+            <span class="countdown-label">Horas</span>
+          </div>
+          <div class="countdown-item">
+            <span class="countdown-number" id="countdown-mins">00</span>
+            <span class="countdown-label">Minutos</span>
+          </div>
+          <div class="countdown-item">
+            <span class="countdown-number" id="countdown-secs">00</span>
+            <span class="countdown-label">Segundos</span>
+          </div>
+        </div>
+
+        <div class="preventa-details">
+          <div class="preventa-detail">
+            <span class="preventa-detail-label">Fecha:</span>
+            <span class="preventa-detail-value">25 Julio 2026</span>
+          </div>
+          <div class="preventa-detail">
+            <span class="preventa-detail-label">Sala:</span>
+            <span class="preventa-detail-value">Sala 8 - Grand Screen</span>
+          </div>
+          <div class="preventa-detail">
+            <span class="preventa-detail-label">Formato:</span>
+            <span class="preventa-detail-value">IMAX 3D</span>
+          </div>
+          <div class="preventa-detail">
+            <span class="preventa-detail-label">Precio preventa:</span>
+            <span class="preventa-detail-value"><span class="preventa-price">7,90€</span><span class="preventa-original-price">9,50€</span></span>
+          </div>
+        </div>
+
+        <form class="preventa-form" id="preventa-form">
+          <div class="preventa-form-row">
+            <div class="form-group">
+              <label for="preventa-name">Nombre</label>
+              <input type="text" id="preventa-name" name="name" required placeholder="Tu nombre" />
+            </div>
+            <div class="form-group">
+              <label for="preventa-email">Email</label>
+              <input type="email" id="preventa-email" name="email" required placeholder="tu@email.com" />
+            </div>
+          </div>
+          <div class="preventa-form-row">
+            <div class="form-group">
+              <label for="preventa-tickets">Entradas</label>
+              <input type="number" id="preventa-tickets" name="tickets" min="1" max="10" value="2" required />
+            </div>
+            <div class="form-group">
+              <label for="preventa-session">Sesión</label>
+              <select id="preventa-session" name="session" required>
+                <option value="">Selecciona sesión</option>
+                <option value="17:00">17:00</option>
+                <option value="19:30">19:30</option>
+                <option value="22:00">22:00</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="btn primary">Reservar Preventa - 7,90€/entrada</button>
+        </form>
+      </div>
+
+      <div class="preventa-poster">
+        <img src="img/The Amazing Digital Circus La película.jpg" alt="The Amazing Digital Circus La película" class="preventa-poster-img" />
+      </div>
+    </div>
+  </section>
+
+  <!-- SALAS -->
+  <section id="salas" class="section section-alt">
+    <div class="section-inner">
+      <h2>Nuestras salas</h2>
+      <p class="section-subtitle">8 salas equipadas con la última tecnología de proyección y sonido.</p>
+
+      <div class="salas-grid" id="salas-grid">
+        <!-- JS genera las salas -->
+      </div>
+    </div>
+  </section>
+
+  <!-- RESERVAS -->
+  <section id="reservas" class="section">
+    <div class="section-inner">
+      <h2>Reservar entradas</h2>
+      <p class="section-subtitle">Completa el formulario para reservar tus entradas.</p>
+
+      <form id="reservation-form" class="reservation-form">
+
+        <div class="form-group">
+          <label for="movie">Película</label>
+          <select id="movie" name="movie" required></select>
+        </div>
+
+        <div class="form-group form-inline">
+          <div>
+            <label for="date">Fecha</label>
+            <input type="date" id="date" name="date" required />
+          </div>
+
+          <div>
+            <label for="time">Hora</label>
+            <select id="time" name="time" required></select>
+          </div>
+
+          <div>
+            <label for="tickets">Entradas</label>
+            <input type="number" id="tickets" name="tickets" min="1" max="10" value="2" required />
+          </div>
+        </div>
+
+        <div class="price-summary">
+          <div class="price-summary-label">Total a pagar</div>
+          <div class="price-summary-value" id="price-total">19,00€</div>
+        </div>
+
+        <div class="form-group">
+          <label for="name">Nombre</label>
+          <input type="text" id="name" name="name" required placeholder="Tu nombre" />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="email" required placeholder="tu@email.com" />
+        </div>
+
+        <button type="submit" class="btn primary">Confirmar reserva</button>
+
+      </form>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="section section-alt">
+    <div class="section-inner">
+      <h2>Contacto</h2>
+      <p class="section-subtitle">Ponte en contacto con nosotros.</p>
+
+      <div class="contact-grid">
+        <div class="contact-item">
+          <p> Av. de la Paz 1, 46010 Valencia, España</p>
+        </div>
+        <div class="contact-item">
+          <p>📞 <a href="tel:+34912345678">+34 912 345 678</a></p>
+        </div>
+        <div class="contact-item">
+          <p>✉️ <a href="mailto:info@cine-lumiere.com">info@cine-lumiere.com</a></p>
+        </div>
+        <div class="contact-item">
+          <p>🕐 Lunes a Domingo: 10:00 - 00:00</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- MODAL DETALLES PELÍCULA -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal" id="movie-modal">
+    <button class="modal-close" id="modal-close">&times;</button>
+    <div class="modal-header">
+      <h2 id="modal-title"></h2>
+      <div class="modal-meta" id="modal-meta"></div>
+    </div>
+    <div class="modal-body">
+      <p class="modal-description" id="modal-description"></p>
+      <p class="modal-sessions" id="modal-sessions"></p>
+      <div class="modal-price" id="modal-price"></div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="#">Aviso Legal</a>
+    <a href="#">Política de Privacidad</a>
+    <a href="#">Cookies</a>
+    <a href="#">Trabaja con nosotros</a>
+  </div>
+  <p>&copy; 2026 Cine Lumière Valencia. Todos los derechos reservados.</p>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
