@@ -11,6 +11,64 @@ const modalOverlay = document.getElementById('modal-overlay');
 const modalClose = document.getElementById('modal-close');
 const prevForm = document.getElementById('preventa-form');
 const toast = document.getElementById('toast');
+const hamburger = document.getElementById('hamburger');
+const mainNav = document.getElementById('main-nav');
+
+// ===================== HAMBURGER MENU =====================
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  mainNav.classList.toggle('open');
+  const isOpen = mainNav.classList.contains('open');
+  hamburger.setAttribute('aria-expanded', isOpen);
+});
+
+mainNav.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    hamburger.classList.remove('active');
+    mainNav.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+  });
+});
+
+// ===================== SCROLL ANIMATIONS =====================
+function initScrollAnimations() {
+  const els = document.querySelectorAll('[data-aos]');
+  if (!els.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('aos-animate');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  els.forEach(el => observer.observe(el));
+}
+
+// ===================== HEADER SCROLL EFFECT =====================
+function initHeaderScroll() {
+  const header = document.querySelector('.site-header');
+  let ticking = false;
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        header.classList.toggle('scrolled', window.scrollY > 60);
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+}
+
+// ===================== IMAGE ERROR FALLBACK =====================
+function handleImgError(img) {
+  img.onerror = null;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600"><rect fill="#151520" width="400" height="600"/><text fill="#8a8a9a" font-size="18" x="200" y="300" text-anchor="middle">Imagen no disponible</text></svg>`;
+  img.src = 'data:image/svg+xml,' + encodeURIComponent(svg);
+}
 
 // ===================== DATOS: 17 PELÍCULAS CARTELERA =====================
 const movies = [
@@ -26,7 +84,7 @@ const movies = [
     price: 9.50,
     type: 'estreno',
     sala: 'Sala 1 - IMAX',
-    poster: 'img/Thunderbolts.jpg',
+    poster: 'img/thunderbolts.jpg',
     showtimes: [
       { time: '16:00' },
       { time: '18:30' },
@@ -46,7 +104,7 @@ const movies = [
     price: 9.50,
     type: 'estreno',
     sala: 'Sala 1 - IMAX',
-    poster: 'img/Mission Impossible.jpg',
+    poster: 'img/mission-impossible.jpg',
     showtimes: [
       { time: '15:30' },
       { time: '19:00' },
@@ -65,7 +123,7 @@ const movies = [
     price: 9.50,
     type: 'estreno',
     sala: 'Sala 3 - Dolby Atmos',
-    poster: 'img/Sinners.jpg',
+    poster: 'img/sinners.jpg',
     showtimes: [
       { time: '17:00' },
       { time: '20:00' },
@@ -84,7 +142,7 @@ const movies = [
     price: 9.50,
     type: 'estreno',
     sala: 'Sala 2 - 4DX',
-    poster: 'img/The Fantastic Four.jpg',
+    poster: 'img/the-fantastic-four.jpg',
     showtimes: [
       { time: '16:30' },
       { time: '19:00' },
@@ -103,7 +161,7 @@ const movies = [
     price: 9.50,
     type: 'estreno',
     sala: 'Sala 1 - IMAX',
-    poster: 'img/jurassic world.jpg',
+    poster: 'img/jurassic-world.jpg',
     showtimes: [
       { time: '15:00' },
       { time: '17:45' },
@@ -123,7 +181,7 @@ const movies = [
     price: 9.50,
     type: 'normal',
     sala: 'Sala 7 - Kids Zone',
-    poster: 'img/Snow White.jpg',
+    poster: 'img/snow-white.webp',
     showtimes: [
       { time: '11:00' },
       { time: '13:30' },
@@ -143,7 +201,7 @@ const movies = [
     price: 9.50,
     type: 'normal',
     sala: 'Sala 7 - Kids Zone',
-    poster: 'img/A Minecraft Movie.jpg',
+    poster: 'img/a-minecraft-movie.webp',
     showtimes: [
       { time: '10:30' },
       { time: '12:30' },
@@ -164,7 +222,7 @@ const movies = [
     price: 16.00,
     type: 'normal',
     sala: 'Sala 6 - VIP',
-    poster: 'img/The Smashing Machine.jpg',
+    poster: 'img/the-smashing-machine.webp',
     showtimes: [
       { time: '17:30' },
       { time: '20:30' },
@@ -183,7 +241,7 @@ const movies = [
     price: 9.50,
     type: 'normal',
     sala: 'Sala 5 - Midnight',
-    poster: 'img/Black Bag.jpg',
+    poster: 'img/black-bag.webp',
     showtimes: [
       { time: '18:00' },
       { time: '20:30' },
@@ -202,7 +260,7 @@ const movies = [
     price: 9.50,
     type: 'normal',
     sala: 'Sala 4 - Clásica',
-    poster: 'img/Novocaine.jpg',
+    poster: 'img/novocaine.webp',
     showtimes: [
       { time: '16:00' },
       { time: '18:30' },
@@ -222,7 +280,7 @@ const movies = [
     price: 9.50,
     type: 'normal',
     sala: 'Sala 3 - Dolby Atmos',
-    poster: 'img/The Accountant 2.jpg',
+    poster: 'img/the-accountant-2.webp',
     showtimes: [
       { time: '17:00' },
       { time: '19:45' },
@@ -241,7 +299,7 @@ const movies = [
     price: 9.50,
     type: 'normal',
     sala: 'Sala 5 - Midnight',
-    poster: 'img/Weapons.jpg',
+    poster: 'img/weapons.webp',
     showtimes: [
       { time: '18:30' },
       { time: '21:00' },
@@ -260,7 +318,7 @@ const movies = [
     price: 9.50,
     type: 'normal',
     sala: 'Sala 3 - Dolby Atmos',
-    poster: 'img/28 Years Later.jpg',
+    poster: 'img/28-years-later.webp',
     showtimes: [
       { time: '19:00' },
       { time: '21:30' },
@@ -279,7 +337,7 @@ const movies = [
     price: 9.50,
     type: 'normal',
     sala: 'Sala 7 - Kids Zone',
-    poster: 'img/Elio.jpg',
+    poster: 'img/elio.webp',
     showtimes: [
       { time: '11:30' },
       { time: '14:00' },
@@ -299,7 +357,7 @@ const movies = [
     price: 12.00,
     type: 'normal',
     sala: 'Sala 1 - IMAX',
-    poster: 'img/F1 The Movie.jpg',
+    poster: 'img/f1-the-movie.webp',
     showtimes: [
       { time: '16:00' },
       { time: '18:45' },
@@ -318,7 +376,7 @@ const movies = [
     price: 9.50,
     type: 'normal',
     sala: 'Sala 4 - Clásica',
-    poster: 'img/How to Train Your Dragon.jpg',
+    poster: 'img/how-to-train-your-dragon.webp',
     showtimes: [
       { time: '12:00' },
       { time: '14:30' },
@@ -338,18 +396,75 @@ const movies = [
     price: 9.50,
     type: 'normal',
     sala: 'Sala 4 - Clásica',
-    poster: 'img/Karate Kid Legends.jpg',
+    poster: 'img/karate-kid-legends.webp',
     showtimes: [
       { time: '15:00' },
       { time: '17:30' },
       { time: '20:00' },
     ],
   },
+  {
+    id: '18',
+    title: 'Project Hail Mary',
+    genre: 'Sci-Fi, Aventura',
+    genreTag: 'accion',
+    rating: '16+',
+    duration: '120 min',
+    director: 'Phil Lord',
+    description: 'Un astronauta despierta en una nave interestelar sin recuerdos y debe contemplar las estrellas para salvar a la humanidad.',
+    price: 9.50,
+    type: 'estreno',
+    sala: 'Sala 1 - IMAX',
+    poster: 'img/project-hail-mary.jpg',
+    showtimes: [
+      { time: '16:00' },
+      { time: '18:30' },
+      { time: '21:00' },
+    ],
+  },
+  {
+    id: '20',
+    title: 'El Principito',
+    genre: 'Fantasía',
+    genreTag: 'familia',
+    rating: 'TP',
+    duration: '60 min',
+    director: 'Mark Osborne',
+    description: 'Lo esencial es invisible a los ojos.',
+    price: 8.00,
+    type: 'estreno',
+    sala: 'Sala 3 - Dolby Atmos',
+    poster: 'img/el-principito.webp',
+    showtimes: [
+      { time: '11:00' },
+      { time: '13:00' },
+      { time: '16:00' },
+    ],
+  },
+  {
+    id: '21',
+    title: 'Michael',
+    genre: 'Drama, Musical, Biopic',
+    genreTag: 'drama',
+    rating: '12+',
+    duration: '127 min',
+    director: 'Antoine Fuqua',
+    description: 'La historia de Michael Jackson, el artista más influyente de todos los tiempos, desde sus inicios en los Jackson Five hasta convertirse en el mayor espectáculo del mundo.',
+    price: 9.50,
+    type: 'estreno',
+    sala: 'Sala 6 - VIP',
+    poster: 'img/michael.webp',
+    showtimes: [
+      { time: '16:00' },
+      { time: '19:00' },
+      { time: '22:00' },
+    ],
+  },
 ];
 
 // ===================== PELÍCULA PREVENTA =====================
 const moviePreventa = {
-  id: '18',
+  id: '22',
   title: 'The Amazing Digital Circus: La película',
   genre: 'Animación, Misterio',
   genreTag: 'familia',
@@ -361,7 +476,7 @@ const moviePreventa = {
   originalPrice: 9.50,
   type: 'preventa',
   sala: 'Sala 8 - Grand Screen',
-  poster: 'img/The Amazing Digital Circus La película.jpg',
+  poster: 'img/the-amazing-digital-circus-la-película.webp',
   showtimes: [
     { time: '17:00' },
     { time: '19:30' },
@@ -430,7 +545,7 @@ function renderMoviesGrid() {
     card.classList.add('movie-card');
 
     const posterHTML = movie.poster
-      ? `<img src="${movie.poster}" alt="${movie.title}" class="movie-poster-img" loading="lazy" />`
+      ? `<img src="${movie.poster}" alt="${movie.title}" class="movie-poster-img" loading="lazy" onerror="handleImgError(this)" />`
       : `<div class="movie-poster-fallback" style="background: linear-gradient(135deg, #1a1a2e, #151520)"><span>🎬</span></div>`;
 
     card.innerHTML = `
@@ -626,7 +741,7 @@ document.addEventListener('keydown', (e) => {
 
 // ===================== COUNTDOWN =====================
 function updateCountdown() {
-  const estreno = new Date('2026-06-05T17:16:00');
+  const estreno = new Date('2026-06-04T17:00:00');
   const now = new Date();
   const diff = estreno - now;
 
@@ -666,6 +781,8 @@ function init() {
   renderSalas();
   fillMovieSelect();
   updatePrice();
+  initScrollAnimations();
+  initHeaderScroll();
 
   document.getElementById('date').value = getTodayFormatted();
 }

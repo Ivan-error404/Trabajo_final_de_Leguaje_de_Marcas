@@ -23,6 +23,7 @@
   --shadow-gold: 0 8px 25px rgba(212, 168, 83, 0.3);
   --shadow-card: 0 8px 32px rgba(0,0,0,0.6);
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --header-height: 60px;
 }
 
 * {
@@ -44,14 +45,41 @@ body {
   overflow-x: hidden;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+img { max-width: 100%; height: auto; display: block; }
+
+/* ===================== SCROLL ANIMATIONS ===================== */
+[data-aos] {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+[data-aos].aos-animate {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-button {
-  font-family: inherit;
-  cursor: pointer;
+/* ===================== KEYFRAMES ===================== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroZoomIn {
+  from { transform: scale(1.15); opacity: 0.6; }
+  to { transform: scale(1); opacity: 1; }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 15px rgba(212, 168, 83, 0.3); }
+  50% { box-shadow: 0 0 30px rgba(212, 168, 83, 0.6); }
 }
 
 /* ===================== HEADER ===================== */
@@ -67,6 +95,12 @@ button {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--color-border);
+  transition: var(--transition);
+}
+
+.site-header.scrolled {
+  background: rgba(10, 10, 15, 0.97);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
 }
 
 .logo {
@@ -78,6 +112,45 @@ button {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  flex-shrink: 0;
+}
+
+/* ===================== HAMBURGER ===================== */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  padding: 8px;
+  gap: 5px;
+  transition: var(--transition);
+  z-index: 1001;
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--color-primary);
+  border-radius: 2px;
+  transition: var(--transition);
+  transform-origin: center;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 .main-nav {
@@ -131,13 +204,15 @@ button {
   position: absolute;
   inset: 0;
   z-index: 0;
+  overflow: hidden;
 }
 
-.hero-bg img {
+.hero-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.25) saturate(0.8);
+  animation: heroZoomIn 4s ease-out forwards;
+  will-change: transform;
 }
 
 .hero-bg::after {
@@ -151,13 +226,24 @@ button {
     rgba(10, 10, 15, 0.5) 70%,
     rgba(10, 10, 15, 1) 100%
   );
+  z-index: 1;
+}
+
+.hero-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 0%, rgba(212, 168, 83, 0.05) 50%, transparent 70%);
+  animation: pulseGlow 4s ease-in-out infinite;
+  z-index: 1;
 }
 
 .hero-content {
   text-align: center;
   max-width: 700px;
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  animation: fadeInUp 1s ease-out 0.5s both;
 }
 
 .hero h1 {
@@ -169,6 +255,7 @@ button {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  text-shadow: 0 0 40px rgba(212, 168, 83, 0.15);
 }
 
 .hero p {
@@ -195,6 +282,8 @@ button {
   cursor: pointer;
   text-decoration: none;
   transition: var(--transition);
+  min-height: 44px;
+  min-width: 44px;
 }
 
 .btn.primary {
@@ -205,6 +294,10 @@ button {
 .btn.primary:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-gold);
+}
+
+.btn.primary:active {
+  transform: translateY(0);
 }
 
 .btn.secondary {
@@ -265,6 +358,7 @@ button {
   font-weight: 500;
   cursor: pointer;
   transition: var(--transition);
+  min-height: 40px;
 }
 
 .genre-btn:hover,
@@ -316,11 +410,11 @@ button {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  transition: transform 0.4s ease;
 }
 
 .movie-poster:hover .movie-poster-img {
-  transform: scale(1.03);
+  transform: scale(1.06);
 }
 
 .movie-poster-fallback {
@@ -428,6 +522,7 @@ button {
   border: none;
   cursor: pointer;
   transition: var(--transition);
+  min-height: 36px;
 }
 
 .session-tag:hover {
@@ -441,6 +536,20 @@ button {
   background: linear-gradient(135deg, var(--color-preventa-bg), #0a0a0f);
   border-top: 1px solid rgba(155, 89, 182, 0.2);
   border-bottom: 1px solid rgba(155, 89, 182, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.preventa-section::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 50%, rgba(155, 89, 182, 0.03) 0%, transparent 50%);
+  animation: floatSlow 8s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .preventa-inner {
@@ -451,6 +560,8 @@ button {
   gap: 3rem;
   align-items: center;
   text-align: left;
+  position: relative;
+  z-index: 1;
 }
 
 .preventa-left {
@@ -468,6 +579,7 @@ button {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin-bottom: 1.5rem;
+  animation: pulseGlow 3s ease-in-out infinite;
 }
 
 .preventa-title {
@@ -596,7 +708,7 @@ button {
 }
 
 .preventa-poster-img:hover {
-  transform: scale(1.03);
+  transform: scale(1.03) rotate(-1deg);
   box-shadow: 0 16px 50px rgba(155, 89, 182, 0.3);
 }
 
@@ -618,6 +730,7 @@ button {
 .sala-card:hover {
   border-color: rgba(212, 168, 83, 0.3);
   transform: translateY(-3px);
+  box-shadow: var(--shadow-soft);
 }
 
 .sala-number {
@@ -696,6 +809,8 @@ button {
   color: var(--color-text);
   font-size: 0.95rem;
   transition: var(--transition);
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .form-group input:focus,
@@ -783,14 +898,15 @@ button {
   max-height: 85vh;
   overflow-y: auto;
   position: relative;
+  animation: fadeInUp 0.3s ease;
 }
 
 .modal-close {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: none;
   background: rgba(255, 255, 255, 0.1);
@@ -799,6 +915,9 @@ button {
   cursor: pointer;
   transition: var(--transition);
   z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .modal-close:hover {
@@ -858,6 +977,7 @@ button {
   border: 1px solid var(--color-border);
   cursor: pointer;
   transition: var(--transition);
+  min-height: 40px;
 }
 
 .modal-session:hover {
@@ -916,11 +1036,25 @@ button {
   opacity: 0;
   transition: var(--transition);
   box-shadow: var(--shadow-gold);
+  max-width: 90vw;
 }
 
 .toast.show {
   transform: translateY(0);
   opacity: 1;
+}
+
+/* ===================== LOADING SKELETON ===================== */
+.skeleton {
+  background: linear-gradient(90deg, var(--color-card) 25%, #1c1c2d 50%, var(--color-card) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: var(--radius-sm);
+}
+
+.skeleton-card {
+  height: 480px;
+  border-radius: var(--radius);
 }
 
 /* ===================== RESPONSIVE ===================== */
@@ -946,15 +1080,37 @@ button {
 
 @media (max-width: 768px) {
   .site-header {
-    flex-direction: column;
-    align-items: flex-start;
     padding: 0.8rem 1.2rem;
   }
 
+  .hamburger {
+    display: flex;
+  }
+
   .main-nav {
-    margin-top: 0.6rem;
-    flex-wrap: wrap;
-    gap: 0.1rem;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    flex-direction: column;
+    background: rgba(10, 10, 15, 0.98);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-left: 1px solid var(--color-border);
+    padding: 5rem 2rem 2rem;
+    gap: 0.5rem;
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+  }
+
+  .main-nav.open {
+    right: 0;
+  }
+
+  .main-nav a {
+    font-size: 1.1rem;
+    padding: 0.8rem 1rem;
   }
 
   .hero {
@@ -1025,6 +1181,13 @@ button {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
+
+  .toast {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    text-align: center;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1045,5 +1208,13 @@ button {
   .genre-btn {
     white-space: nowrap;
     flex-shrink: 0;
+  }
+
+  .preventa-title {
+    font-size: 1.4rem;
+  }
+
+  .countdown-number {
+    font-size: 1.5rem;
   }
 }
