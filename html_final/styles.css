@@ -104,7 +104,6 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .logo {
-  position: relative;
   font-weight: 900;
   font-size: 1.4rem;
   letter-spacing: 0.2em;
@@ -116,13 +115,6 @@ img { max-width: 100%; height: auto; display: block; }
   flex-shrink: 0;
 }
 
-.logo-bg {
-  position: absolute;
-  inset: 0;
-  background: url('img/fine-lumiere-fondo-principal.jpg') no-repeat center/contain;
-  opacity: 0.2;
-  z-index: -1;
-}
 
 /* ===================== HAMBURGER ===================== */
 .hamburger {
