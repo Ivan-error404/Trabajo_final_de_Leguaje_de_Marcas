@@ -1,0 +1,1298 @@
+/* ===================== VARIABLES GLOBALES (COLORES, FUENTES, SOMBRAS) ===================== */
+/* Define los colores, fuentes, radios y sombras que se reutilizan en toda la web */
+:root {
+  --color-bg: #0a0a0f;
+  --color-bg-alt: #0d0d1a;
+  --color-card: #151520;
+  --color-card-hover: #1c1c2d;
+  --color-primary: #d4a853;
+  --color-primary-hover: #e8c17a;
+  --color-primary-dark: #b8860b;
+  --color-text: #ffffff;
+  --color-muted: #8a8a9a;
+  --color-border: #1f1f2e;
+  --color-badge-estreno: #e50914;
+  --color-badge-preventa: #9b59b6;
+  --color-badge-normal: #3498db;
+  --color-preventa-bg: #1a0d2e;
+  --color-preventa-border: #9b59b6;
+  --color-success: #2ecc71;
+  --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow-soft: 0 4px 20px rgba(0,0,0,0.5);
+  --shadow-gold: 0 8px 25px rgba(212, 168, 83, 0.3);
+  --shadow-card: 0 8px 32px rgba(0,0,0,0.6);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --header-height: 60px;
+}
+
+/* ====== RESET BÁSICO ====== */
+/* Quita márgenes y paddings por defecto, aplica border-box a todos los elementos */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Scroll suave al hacer clic en enlaces internos */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ====== ESTILOS BASE DEL BODY ====== */
+/* Fondo oscuro, texto blanco, fuente principal Inter */
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* Los enlaces heredan el color del texto y no tienen subrayado */
+a { color: inherit; text-decoration: none; }
+/* Los botones usan la misma fuente que el texto */
+button { font-family: inherit; cursor: pointer; }
+/* Las imágenes se ajustan al ancho máximo de su contenedor */
+img { max-width: 100%; height: auto; display: block; }
+
+/* ====== ANIMACIONES DE APARICIÓN AL HACER SCROLL ====== */
+/* Los elementos con data-aos empiezan invisibles y se deslizan hacia arriba al aparecer */
+[data-aos] {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+[data-aos].aos-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ====== ANIMACIONES CLAVE (KEYFRAMES) ====== */
+/* fadeInUp: aparece deslizándose desde abajo */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* heroZoomIn: zoom suave al cargar la imagen del hero */
+@keyframes heroZoomIn {
+  from { transform: scale(1.15); opacity: 0.6; }
+  to { transform: scale(1); opacity: 1; }
+}
+/* shimmer: efecto de brillo para esqueletos de carga (skeleton) */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+/* floatSlow: flotación lenta para fondos decorativos */
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+/* pulseGlow: brillo pulsante para botones y badges */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 15px rgba(212, 168, 83, 0.3); }
+  50% { box-shadow: 0 0 30px rgba(212, 168, 83, 0.6); }
+}
+
+/* ====== HEADER / BARRA SUPERIOR ====== */
+/* Barra fija en la parte superior con desenfoque al fondo */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.9rem 2rem;
+  background: rgba(10, 10, 15, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--color-border);
+  transition: var(--transition);
+}
+
+/* Al hacer scroll, el header se vuelve más opaco y tiene sombra */
+.site-header.scrolled {
+  background: rgba(10, 10, 15, 0.97);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* ====== LOGO ====== */
+/* Texto con gradiente dorado, mayúsculas y espaciado entre letras */
+.logo {
+  font-weight: 900;
+  font-size: 1.4rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  flex-shrink: 0;
+}
+
+
+/* ====== MENÚ HAMBURGUESA ====== */
+/* Oculto en escritorio, visible solo en móvil */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  padding: 8px;
+  gap: 5px;
+  transition: var(--transition);
+  z-index: 1001;
+}
+
+/* Las tres rayas del icono hamburguesa */
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--color-primary);
+  border-radius: 2px;
+  transition: var(--transition);
+  transform-origin: center;
+}
+
+/* Cuando está activo, las rayas se convierten en una X */
+.hamburger.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ====== NAVEGACIÓN PRINCIPAL ====== */
+.main-nav {
+  display: flex;
+  gap: 0.2rem;
+}
+
+/* Enlaces del menú con efecto hover de fondo y subrayado */
+.main-nav a {
+  padding: 0.5rem 0.9rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+  position: relative;
+}
+
+.main-nav a:hover {
+  background: rgba(212, 168, 83, 0.1);
+  color: var(--color-primary);
+}
+
+/* Línea decorativa que aparece al hacer hover en los enlaces */
+.main-nav a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 2px;
+  width: 0%;
+  height: 2px;
+  background: var(--color-primary);
+  transition: var(--transition);
+  transform: translateX(-50%);
+}
+
+.main-nav a:hover::after {
+  width: 60%;
+}
+
+/* ====== SECCIÓN HERO / INICIO ====== */
+/* Ocupa casi toda la pantalla con imagen de fondo y texto centrado */
+.hero {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  position: relative;
+  overflow: hidden;
+  background: #0a0a0f;
+}
+
+/* Contenedor de la imagen de fondo */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* Imagen de fondo con zoom suave al cargar */
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: heroZoomIn 4s ease-out forwards;
+  will-change: transform;
+}
+
+/* Capa oscura encima de la imagen para que el texto se lea bien */
+.hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 10, 15, 0.6) 0%,
+    rgba(10, 10, 15, 0.3) 40%,
+    rgba(10, 10, 15, 0.5) 70%,
+    rgba(10, 10, 15, 1) 100%
+  );
+  z-index: 1;
+}
+
+/* Brillo decorativo dorado pulsante en el centro */
+.hero-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 0%, rgba(212, 168, 83, 0.05) 50%, transparent 70%);
+  animation: pulseGlow 4s ease-in-out infinite;
+  z-index: 1;
+}
+
+/* Texto y botones sobre la imagen */
+.hero-content {
+  text-align: center;
+  max-width: 700px;
+  position: relative;
+  z-index: 2;
+  animation: fadeInUp 1s ease-out 0.5s both;
+}
+
+/* Título principal con gradiente de blanco a dorado */
+.hero h1 {
+  font-size: 3.2rem;
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #fff, var(--color-primary-hover));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 40px rgba(212, 168, 83, 0.15);
+}
+
+/* Subtítulo del hero */
+.hero p {
+  font-size: 1.15rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 2rem;
+}
+
+/* Contenedor de botones en el hero */
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ====== BOTONES ====== */
+/* Botón base con forma de píldora (border-radius enorme) */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.6rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--transition);
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Botón dorado (primario): fondo con gradiente dorado */
+.btn.primary {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
+  color: #0a0a0f;
+}
+
+.btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-gold);
+}
+
+.btn.primary:active {
+  transform: translateY(0);
+}
+
+/* Botón secundario: solo borde dorado sin relleno */
+.btn.secondary {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+}
+
+.btn.secondary:hover {
+  background-color: var(--color-primary);
+  color: #0a0a0f;
+}
+
+/* ====== SECCIONES GENÉRICAS ====== */
+/* Padding estándar y ancho máximo para todas las secciones */
+.section {
+  padding: 4rem 2rem;
+}
+
+/* Títulos de sección */
+.section h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+/* En secciones alternas, el título tiene un gradiente gris */
+.section-alt h2 {
+  background: linear-gradient(135deg, #fff, var(--color-muted));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-subtitle {
+  color: var(--color-muted);
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
+
+.section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ====== FILTROS DE GÉNERO ====== */
+/* Botones para filtrar películas por género */
+.genre-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Cada botón de filtro es redondeado con borde sutil */
+.genre-btn {
+  padding: 0.5rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-card);
+  color: var(--color-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  min-height: 40px;
+}
+
+/* Al pasar el ratón o si está activo, se ilumina en dorado */
+.genre-btn:hover,
+.genre-btn.active {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: rgba(212, 168, 83, 0.1);
+}
+
+/* ====== GRID DE CARTELERA ====== */
+/* Grid responsivo que se adapta automáticamente (mínimo 240px por tarjeta) */
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+/* ====== TARJETA DE PELÍCULA ====== */
+/* Cada película se muestra como una tarjeta con póster e información */
+.movie-card {
+  background: linear-gradient(145deg, var(--color-card), #0d0d15);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+  cursor: default;
+  position: relative;
+}
+
+/* Al pasar el ratón, la tarjeta se eleva */
+.movie-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card);
+  border-color: rgba(212, 168, 83, 0.3);
+}
+
+/* Contenedor del póster de la película */
+.movie-poster {
+  width: 100%;
+  height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  background: linear-gradient(135deg, #1a1a2e, #151520);
+}
+
+/* Imagen del póster que se agranda al hacer hover */
+.movie-poster-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.movie-poster:hover .movie-poster-img {
+  transform: scale(1.06);
+}
+
+/* Placeholder cuando no hay imagen de póster */
+.movie-poster-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+}
+
+/* Etiqueta superior derecha: Estreno / Preventa / Hoy */
+.movie-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  z-index: 2;
+}
+
+/* Color rojo para "Estreno" */
+.movie-badge.estreno {
+  background: var(--color-badge-estreno);
+  color: #fff;
+}
+
+/* Color morado para "Preventa" */
+.movie-badge.preventa {
+  background: var(--color-badge-preventa);
+  color: #fff;
+}
+
+/* Color azul para "Hoy" (películas normales) */
+.movie-badge.normal {
+  background: var(--color-badge-normal);
+  color: #fff;
+}
+
+/* Clasificación por edad (TP, 7+, 12+, 16+, 18+) */
+.movie-rating {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  color: var(--color-primary);
+  z-index: 2;
+  border: 1px solid rgba(212, 168, 83, 0.3);
+}
+
+/* Cuerpo de la tarjeta con la información */
+.movie-body {
+  padding: 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Título de la película */
+.movie-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  line-height: 1.3;
+}
+
+/* Metadatos: duración, sala, precio */
+.movie-meta {
+  display: flex;
+  gap: 0.6rem;
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  margin-bottom: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.movie-meta span {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+/* Género de la película en dorado */
+.movie-genre {
+  font-size: 0.8rem;
+  color: var(--color-primary);
+  font-weight: 500;
+  margin-bottom: 0.8rem;
+}
+
+/* Horarios disponibles: botones pequeños para cada sesión */
+.movie-sessions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: auto;
+}
+
+/* Cada botón de horario */
+.session-tag {
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background-color: #252538;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--color-text);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  min-height: 36px;
+}
+
+.session-tag:hover {
+  background-color: var(--color-primary);
+  color: #0a0a0f;
+}
+
+/* ====== SECCIÓN PREVENTA ====== */
+/* Fondo morado oscuro con efectos decorativos */
+.preventa-section {
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, var(--color-preventa-bg), #0a0a0f);
+  border-top: 1px solid rgba(155, 89, 182, 0.2);
+  border-bottom: 1px solid rgba(155, 89, 182, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.preventa-section::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 50%, rgba(155, 89, 182, 0.03) 0%, transparent 50%);
+  animation: floatSlow 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.preventa-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 3rem;
+  align-items: center;
+  text-align: left;
+  position: relative;
+  z-index: 1;
+}
+
+.preventa-left {
+  text-align: center;
+}
+
+.preventa-badge {
+  display: inline-block;
+  padding: 0.4rem 1.2rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--color-badge-preventa), #8e44ad);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+.preventa-title {
+  font-size: 2.4rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #d4a853, #f5e6b3, #d4a853);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.preventa-subtitle {
+  color: var(--color-muted);
+  font-size: 1.1rem;
+  margin-bottom: 2.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.countdown {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.countdown-item {
+  text-align: center;
+}
+
+.countdown-number {
+  display: block;
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: var(--color-primary);
+  line-height: 1;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.countdown-label {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.3rem;
+}
+
+.preventa-details {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.preventa-detail {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  background: rgba(155, 89, 182, 0.1);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(155, 89, 182, 0.2);
+}
+
+.preventa-detail-label {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+.preventa-detail-value {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.preventa-price {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+.preventa-original-price {
+  font-size: 1rem;
+  color: var(--color-muted);
+  text-decoration: line-through;
+  margin-left: 0.5rem;
+}
+
+.preventa-form {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.preventa-form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.preventa-form .form-group {
+  flex: 1;
+}
+
+.preventa-poster {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preventa-poster-img {
+  width: 100%;
+  max-width: 300px;
+  border-radius: var(--radius);
+  border: 2px solid rgba(155, 89, 182, 0.3);
+  box-shadow: 0 12px 40px rgba(155, 89, 182, 0.2);
+  transition: var(--transition);
+}
+
+.preventa-poster-img:hover {
+  transform: scale(1.03) rotate(-1deg);
+  box-shadow: 0 16px 50px rgba(155, 89, 182, 0.3);
+}
+
+/* ====== TARJETAS DE SALAS ====== */
+/* Grid con las 8 salas del cine */
+.salas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.sala-card {
+  padding: 1.2rem;
+  background: var(--color-card);
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  transition: var(--transition);
+}
+
+.sala-card:hover {
+  border-color: rgba(212, 168, 83, 0.3);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-soft);
+}
+
+.sala-number {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.4rem;
+}
+
+.sala-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+
+.sala-format {
+  font-size: 0.8rem;
+  color: var(--color-primary-hover);
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.sala-capacity {
+  font-size: 0.82rem;
+  color: var(--color-muted);
+}
+
+.sala-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.6rem;
+}
+
+.sala-feature {
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background: rgba(212, 168, 83, 0.1);
+  font-size: 0.7rem;
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+/* ====== FORMULARIO DE RESERVAS ====== */
+/* Formulario para reservar entradas con campos oscuros */
+.reservation-form {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: var(--color-text);
+}
+
+.form-inline {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-card);
+  color: var(--color-text);
+  font-size: 0.95rem;
+  transition: var(--transition);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(212, 168, 83, 0.15);
+}
+
+.price-summary {
+  padding: 1rem;
+  background: var(--color-card);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.price-summary-label {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+.price-summary-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+/* ====== SECCIÓN DE CONTACTO ====== */
+/* Grid con dirección, teléfono, email y horario */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.contact-item {
+  padding: 1.2rem;
+  background-color: var(--color-card);
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  transition: var(--transition);
+}
+
+.contact-item:hover {
+  transform: translateY(-3px);
+  border-color: rgba(212, 168, 83, 0.3);
+}
+
+.contact-item p {
+  font-size: 0.95rem;
+}
+
+.contact-item a {
+  color: var(--color-primary);
+  transition: var(--transition);
+}
+
+.contact-item a:hover {
+  color: var(--color-primary-hover);
+}
+
+/* ====== VENTANA MODAL ====== */
+/* Fondo oscuro y tarjeta centrada con detalles de la película */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal {
+  background: var(--color-card);
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  max-width: 600px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  animation: fadeInUp 0.3s ease;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-text);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: var(--transition);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.modal-header {
+  padding: 2rem 2rem 0;
+}
+
+.modal-header h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.modal-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  margin-bottom: 1rem;
+}
+
+.modal-meta span {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.modal-body {
+  padding: 0 2rem 2rem;
+}
+
+.modal-description {
+  color: var(--color-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.modal-sessions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.modal-session {
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  background: #252538;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: var(--transition);
+  min-height: 40px;
+}
+
+.modal-session:hover {
+  background: var(--color-primary);
+  color: #0a0a0f;
+  border-color: var(--color-primary);
+}
+
+.modal-price {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+/* ====== PIE DE PÁGINA ====== */
+/* Enlaces legales centrados y copyright */
+.site-footer {
+  padding: 2rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  background-color: #050509;
+  border-top: 1px solid var(--color-border);
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  transition: var(--transition);
+}
+
+.footer-links a:hover {
+  color: var(--color-primary);
+}
+
+/* ====== NOTIFICACIÓN FLOTANTE (TOAST) ====== */
+/* Mensaje que aparece en la esquina inferior derecha al hacer una reserva */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-card);
+  border: 1px solid var(--color-primary);
+  color: var(--color-text);
+  font-size: 0.95rem;
+  z-index: 3000;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: var(--transition);
+  box-shadow: var(--shadow-gold);
+  max-width: 90vw;
+}
+
+.toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ====== ESQUELETO DE CARGA (SKELETON) ====== */
+/* Animación de brillo para mostrar mientras cargan los elementos */
+.skeleton {
+  background: linear-gradient(90deg, var(--color-card) 25%, #1c1c2d 50%, var(--color-card) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: var(--radius-sm);
+}
+
+.skeleton-card {
+  height: 480px;
+  border-radius: var(--radius);
+}
+
+/* ====== DISEÑO RESPONSIVE ====== */
+/* Ajustes para diferentes tamaños de pantalla */
+/* ====== TABLETS (hasta 1024px) ====== */
+/* La preventa se apila verticalmente: primero el póster, luego el contenido */
+@media (max-width: 1024px) {
+  .preventa-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .preventa-left {
+    order: 2;
+  }
+
+  .preventa-poster {
+    order: 1;
+    margin-bottom: 1rem;
+  }
+
+  .preventa-poster-img {
+    max-width: 200px;
+  }
+}
+
+/* ====== MÓVIL (hasta 768px) ====== */
+/* Menú lateral, hero más pequeño, grids de 1 columna, ajustes de tipografía */
+@media (max-width: 768px) {
+  .site-header {
+    padding: 0.8rem 1.2rem;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  /* El menú se convierte en un panel lateral que se desliza desde la derecha */
+  .main-nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    flex-direction: column;
+    background: rgba(10, 10, 15, 0.98);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-left: 1px solid var(--color-border);
+    padding: 5rem 2rem 2rem;
+    gap: 0.5rem;
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+  }
+
+  .main-nav.open {
+    right: 0;
+  }
+
+  .main-nav a {
+    font-size: 1.1rem;
+    padding: 0.8rem 1rem;
+  }
+
+  .hero {
+    min-height: 60vh;
+    padding: 3rem 1.5rem;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .section {
+    padding: 3rem 1.2rem;
+  }
+
+  .movies-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .movie-poster {
+    height: 260px;
+  }
+
+  .form-inline {
+    grid-template-columns: 1fr;
+  }
+
+  .countdown {
+    gap: 1rem;
+  }
+
+  .countdown-number {
+    font-size: 2rem;
+  }
+
+  .preventa-form-row {
+    flex-direction: column;
+  }
+
+  .preventa-details {
+    gap: 1rem;
+  }
+
+  .preventa-title {
+    font-size: 1.8rem;
+  }
+
+  .salas-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal {
+    margin: 1rem;
+    max-height: 90vh;
+  }
+
+  .modal-header,
+  .modal-body {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .toast {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    text-align: center;
+  }
+}
+
+/* ====== MÓVIL PEQUEÑO (hasta 480px) ====== */
+/* Textos más pequeños y filtros con scroll horizontal */
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 1.6rem;
+  }
+
+  .section h2 {
+    font-size: 1.5rem;
+  }
+
+  /* Los filtros de género se desplazan horizontalmente */
+  .genre-filters {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 0.5rem;
+  }
+
+  .genre-btn {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .preventa-title {
+    font-size: 1.4rem;
+  }
+
+  .countdown-number {
+    font-size: 1.5rem;
+  }
+}

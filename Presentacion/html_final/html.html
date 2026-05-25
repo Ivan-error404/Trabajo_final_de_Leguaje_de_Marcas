@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<!-- ====== Configuración del documento: idioma español ====== -->
+<html lang="es">
+<head>
+  <!-- ====== Codificación de caracteres y viewport para dispositivos móviles ====== -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ====== Título que aparece en la pestaña del navegador ====== -->
+  <title>Cine Lumière Valencia</title>
+  <!-- ====== Descripción para buscadores (SEO) ====== -->
+  <meta name="description" content="Cine Lumière en Valencia: cartelera, estrenos, preventa y reservas de entradas.">
+  <!-- ====== Hoja de estilos principal ====== -->
+  <link rel="stylesheet" href="styles.css" />
+  <!-- ====== Librería de iconos Font Awesome ====== -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+<!-- ====== HEADER: LOGO + MENÚ DE NAVEGACIÓN ====== -->
+<header class="site-header">
+  <!-- ====== Logo del cine con gradiente dorado ====== -->
+  <div class="logo">Cine Lumière</div>
+  <!-- ====== Botón hamburguesa para abrir/cerrar menú en móvil (tres rayas) ====== -->
+  <button class="hamburger" id="hamburger" aria-label="Menú de navegación" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <!-- ====== Enlaces de navegación que llevan a cada sección de la página ====== -->
+  <nav class="main-nav" id="main-nav">
+    <a href="#inicio">Inicio</a>
+    <a href="#cartelera">Cartelera</a>
+    <a href="#preventa">Preventa</a>
+    <a href="#salas">Salas</a>
+    <a href="#reservas">Reservar</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+</header>
+
+<!-- ====== CONTENIDO PRINCIPAL ====== -->
+<main>
+
+  <!-- ====== SECCIÓN INICIO / HERO ====== -->
+  <section id="inicio" class="hero">
+    <!-- ====== Imagen de fondo del hero ====== -->
+    <div class="hero-bg">
+      <img src="img/hero-cinema.jpg" alt="Cine Lumière Valencia" class="hero-img" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%221920%22 height=%221280%22><rect fill=%22%23151520%22 width=%221920%22 height=%221280%22/><text fill=%22%238a8a9a%22 font-size=%2224%22 x=%22960%22 y=%22640%22 text-anchor=%22middle%22>Cinema</text></svg>'" />
+    </div>
+    <!-- ====== Texto y botones sobre la imagen ====== -->
+    <div class="hero-content">
+      <h1>Tu cine de confianza en Valencia</h1>
+      <p>Estrenos, clásicos y sesiones especiales. 8 salas con los mejores formatos: IMAX, 4DX y Dolby Atmos.</p>
+      <div class="hero-buttons">
+        <a href="#cartelera" class="btn primary">Ver cartelera</a>
+        <a href="#reservas" class="btn secondary">Reservar entradas</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SECCIÓN CARTELERA ====== -->
+  <section id="cartelera" class="section section-alt" data-aos="fade-up">
+    <div class="section-inner">
+      <h2>Cartelera</h2>
+      <p class="section-subtitle">Las mejores películas de hoy. Selecciona un horario para reservar.</p>
+
+      <!-- ====== Botones de filtro por género (los crea JavaScript) ====== -->
+      <div class="genre-filters" id="genre-filters">
+        <!-- JS genera los filtros -->
+      </div>
+
+      <!-- ====== Grid donde se pintan las tarjetas de películas (lo genera JavaScript) ====== -->
+      <div id="movies-grid" class="movies-grid">
+        <!-- JS genera las películas -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SECCIÓN PREVENTA DIGITAL CIRCUS ====== -->
+  <section id="preventa" class="preventa-section" data-aos="fade-up">
+    <div class="preventa-inner">
+      <div class="preventa-left">
+        <!-- ====== Etiqueta destacada de preventa ====== -->
+        <span class="preventa-badge">🎪 Preventa Exclusiva</span>
+        <h2 class="preventa-title">The Amazing Digital Circus: La película</h2>
+        <p class="preventa-subtitle">La esperada adaptación de la serie de animación más vista de internet llega al cine.</p>
+
+        <!-- ====== Cuenta atrás hasta el estreno ====== -->
+        <div class="countdown" id="countdown">
+          <div class="countdown-item">
+            <span class="countdown-number" id="countdown-days">00</span>
+            <span class="countdown-label">Días</span>
+          </div>
+          <div class="countdown-item">
+            <span class="countdown-number" id="countdown-hours">00</span>
+            <span class="countdown-label">Horas</span>
+          </div>
+          <div class="countdown-item">
+            <span class="countdown-number" id="countdown-mins">00</span>
+            <span class="countdown-label">Minutos</span>
+          </div>
+          <div class="countdown-item">
+            <span class="countdown-number" id="countdown-secs">00</span>
+            <span class="countdown-label">Segundos</span>
+          </div>
+        </div>
+
+        <!-- ====== Detalles del evento en preventa ====== -->
+        <div class="preventa-details">
+          <div class="preventa-detail">
+            <span class="preventa-detail-label">Fecha:</span>
+            <span class="preventa-detail-value">4 Junio 2026</span>
+          </div>
+          <div class="preventa-detail">
+            <span class="preventa-detail-label">Sala:</span>
+            <span class="preventa-detail-value">Sala 8 - Grand Screen</span>
+          </div>
+          <div class="preventa-detail">
+            <span class="preventa-detail-label">Formato:</span>
+            <span class="preventa-detail-value">IMAX 3D</span>
+          </div>
+          <div class="preventa-detail">
+            <span class="preventa-detail-label">Precio preventa:</span>
+            <span class="preventa-detail-value"><span class="preventa-price">7,90€</span><span class="preventa-original-price">9,50€</span></span>
+          </div>
+        </div>
+
+        <!-- ====== Formulario de reserva para la preventa ====== -->
+        <form class="preventa-form" id="preventa-form">
+          <div class="preventa-form-row">
+            <div class="form-group">
+              <label for="preventa-name">Nombre</label>
+              <input type="text" id="preventa-name" name="name" required placeholder="Tu nombre" />
+            </div>
+            <div class="form-group">
+              <label for="preventa-email">Email</label>
+              <input type="email" id="preventa-email" name="email" required placeholder="tu@email.com" />
+            </div>
+          </div>
+          <div class="preventa-form-row">
+            <div class="form-group">
+              <label for="preventa-tickets">Entradas</label>
+              <input type="number" id="preventa-tickets" name="tickets" min="1" max="10" value="2" required />
+            </div>
+            <div class="form-group">
+              <label for="preventa-session">Sesión</label>
+              <select id="preventa-session" name="session" required>
+                <option value="">Selecciona sesión</option>
+                <option value="17:00">17:00</option>
+                <option value="19:30">19:30</option>
+                <option value="22:00">22:00</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="btn primary">Reservar Preventa - 7,90€/entrada</button>
+        </form>
+      </div>
+
+      <!-- ====== Póster de la película en preventa ====== -->
+      <div class="preventa-poster">
+        <img src="img/the-amazing-digital-circus-la-película.webp" alt="The Amazing Digital Circus La película" class="preventa-poster-img" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22450%22><rect fill=%22%23151520%22 width=%22300%22 height=%22450%22/><text fill=%22%238a8a9a%22 font-size=%2216%22 x=%22150%22 y=%22225%22 text-anchor=%22middle%22>Poster</text></svg>'" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SECCIÓN SALAS ====== -->
+  <section id="salas" class="section section-alt" data-aos="fade-up">
+    <div class="section-inner">
+      <h2>Nuestras salas</h2>
+      <p class="section-subtitle">8 salas equipadas con la última tecnología de proyección y sonido.</p>
+
+      <!-- ====== Grid con las tarjetas de cada sala (lo genera JavaScript) ====== -->
+      <div class="salas-grid" id="salas-grid">
+        <!-- JS genera las salas -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SECCIÓN RESERVAS ====== -->
+  <section id="reservas" class="section" data-aos="fade-up">
+    <div class="section-inner">
+      <h2>Reservar entradas</h2>
+      <p class="section-subtitle">Completa el formulario para reservar tus entradas.</p>
+
+      <form id="reservation-form" class="reservation-form">
+
+        <!-- ====== Selección de película (lo llena JavaScript) ====== -->
+        <div class="form-group">
+          <label for="movie">Película</label>
+          <select id="movie" name="movie" required></select>
+        </div>
+
+        <!-- ====== Fecha, hora y número de entradas ====== -->
+        <div class="form-group form-inline">
+          <div>
+            <label for="date">Fecha</label>
+            <input type="date" id="date" name="date" required />
+          </div>
+
+          <div>
+            <label for="time">Hora</label>
+            <select id="time" name="time" required></select>
+          </div>
+
+          <div>
+            <label for="tickets">Entradas</label>
+            <input type="number" id="tickets" name="tickets" min="1" max="10" value="2" required />
+          </div>
+        </div>
+
+        <!-- ====== Resumen del precio total ====== -->
+        <div class="price-summary">
+          <div class="price-summary-label">Total a pagar</div>
+          <div class="price-summary-value" id="price-total">19,00€</div>
+        </div>
+
+        <!-- ====== Datos del cliente ====== -->
+        <div class="form-group">
+          <label for="name">Nombre</label>
+          <input type="text" id="name" name="name" required placeholder="Tu nombre" />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="email" required placeholder="tu@email.com" />
+        </div>
+
+        <button type="submit" class="btn primary">Confirmar reserva</button>
+
+      </form>
+    </div>
+  </section>
+
+  <!-- ====== SECCIÓN CONTACTO ====== -->
+  <section id="contacto" class="section section-alt" data-aos="fade-up">
+    <div class="section-inner">
+      <h2>Contacto</h2>
+      <p class="section-subtitle">Ponte en contacto con nosotros.</p>
+
+      <!-- ====== Dirección, teléfono, email y horario del cine ====== -->
+      <div class="contact-grid">
+        <div class="contact-item">
+          <p> Av. de la Paz 1, 46010 Valencia, España</p>
+        </div>
+        <div class="contact-item">
+          <p>📞 <a href="tel:+34912345678">+34 912 345 678</a></p>
+        </div>
+        <div class="contact-item">
+          <p>✉️ <a href="mailto:info@cine-lumiere.com">info@cine-lumiere.com</a></p>
+        </div>
+        <div class="contact-item">
+          <p>🕐 Lunes a Domingo: 10:00 - 00:00</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ====== VENTANA MODAL CON DETALLES DE LA PELÍCULA ====== -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal" id="movie-modal">
+    <!-- ====== Botón para cerrar el modal ====== -->
+    <button class="modal-close" id="modal-close">&times;</button>
+    <div class="modal-header">
+      <!-- ====== Título de la película (lo rellena JavaScript) ====== -->
+      <h2 id="modal-title"></h2>
+      <!-- ====== Metadatos: duración, rating, director, sala, género (los rellena JS) ====== -->
+      <div class="modal-meta" id="modal-meta"></div>
+    </div>
+    <div class="modal-body">
+      <!-- ====== Descripción de la película ====== -->
+      <p class="modal-description" id="modal-description"></p>
+      <!-- ====== Botones de sesiones disponibles ====== -->
+      <p class="modal-sessions" id="modal-sessions"></p>
+      <!-- ====== Precio desde ====== -->
+      <div class="modal-price" id="modal-price"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== NOTIFICACIÓN FLOTANTE (TOAST) ====== -->
+<div class="toast" id="toast"></div>
+
+<!-- ====== PIE DE PÁGINA ====== -->
+<footer class="site-footer">
+  <!-- ====== Enlaces legales ====== -->
+  <div class="footer-links">
+    <a href="#">Aviso Legal</a>
+    <a href="#">Política de Privacidad</a>
+    <a href="#">Cookies</a>
+    <a href="#">Trabaja con nosotros</a>
+  </div>
+  <p>&copy; 2026 Cine Lumière Valencia. Todos los derechos reservados.</p>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
